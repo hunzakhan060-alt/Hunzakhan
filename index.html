@@ -14,7 +14,7 @@
 </script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Hunza Khan — Brand &amp; Web Design Studio</title>
+<title>Hunza Khan — Brand & Web Design Studio</title>
 <meta name="description" content="Hunza Khan is an independent brand and web design studio — logo, packaging, print, WordPress, Shopify and custom websites, designed and built by one hand, start to finish.">
 <link rel="canonical" href="https://hunzakhan.com/index.html">
 <meta name="theme-color" content="#0D1412">
@@ -24,7 +24,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Hunza Khan">
 <meta property="og:title" content="Hunza Khan — Brand & Web Design Studio">
-<meta property="og:description" content="Branding that turns heads. Websites that close the deal. One studio, one point of contact, full brand-to-launch builds.">
+<meta property="og:description" content="Hunza Khan is an independent brand and web design studio — logo, packaging, print, WordPress, Shopify and custom websites, designed and built by one hand, start to finish.">
 <meta property="og:url" content="https://hunzakhan.com/index.html">
 <meta property="og:image" content="https://hunzakhan.com/assets/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -33,7 +33,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Hunza Khan — Brand & Web Design Studio">
-<meta name="twitter:description" content="Branding that turns heads. Websites that close the deal. One studio, one point of contact, full brand-to-launch builds.">
+<meta name="twitter:description" content="Hunza Khan is an independent brand and web design studio — logo, packaging, print, WordPress, Shopify and custom websites, designed and built by one hand, start to finish.">
 <meta name="twitter:image" content="https://hunzakhan.com/assets/og-image.png">
 
 <!-- Favicons / Manifest -->
@@ -75,7 +75,6 @@
 </script>
 
 <script>document.documentElement.classList.add('js');</script>
-
 <style>
 /* ============================================================
    RESET & BASE
@@ -402,6 +401,8 @@ html.js .ridge-hero .ridge-secondary { animation: drawRidge 2.2s var(--ease) for
 .work-card { border: 1px solid var(--line-on-mist); border-radius: var(--radius-md); overflow: hidden; transition: transform .4s var(--ease), border-color .4s var(--ease); }
 .work-card:hover { transform: translateY(-6px); border-color: var(--lake-dim); }
 .work-visual { aspect-ratio: 4/3; position: relative; display: flex; align-items: flex-end; justify-content: flex-end; padding: 16px; }
+.work-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.work-visual span { position: relative; z-index: 1; }
 .work-visual span { font-family: var(--font-mono); font-size: 0.75rem; color: rgba(255,255,255,0.85); opacity: 0; transform: translateY(6px); transition: opacity .3s var(--ease), transform .3s var(--ease); }
 .work-card:hover .work-visual span { opacity: 1; transform: translateY(0); }
 .wv-1 { background: linear-gradient(135deg, #103430 0%, #17A398 130%); }
@@ -562,6 +563,138 @@ html.js .ridge-hero .ridge-secondary { animation: drawRidge 2.2s var(--ease) for
 .work-meta p.scope { font-family: var(--font-body); font-size: 0.85rem; margin-top: 8px; }
 .wv-7 { background: linear-gradient(140deg, #1D2925 0%, #3A5850 100%); }
 .wv-8 { background: linear-gradient(140deg, #2B1F0E 0%, #17A398 60%, #E0A23F 160%); }
+
+/* ============================================================
+   MEGA MENU — DESKTOP DROPDOWN
+   ============================================================ */
+.nav-item { position: relative; display: flex; align-items: center; }
+.nav-item.has-dropdown > a { display: inline-flex; align-items: center; gap: 6px; }
+.nav-item .chevron { width: 8px; height: 8px; transition: transform .25s var(--ease); flex-shrink: 0; }
+.nav-dropdown {
+  position: absolute; top: calc(100% + 20px); left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  min-width: 240px; max-width: 280px;
+  background: var(--ink-soft); border: 1px solid var(--line-on-ink); border-radius: var(--radius-md);
+  padding: 10px; display: grid; gap: 2px;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .22s var(--ease), transform .22s var(--ease), visibility .22s;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.45);
+  z-index: 950;
+}
+.nav-item.has-dropdown:hover .nav-dropdown,
+.nav-item.has-dropdown:focus-within .nav-dropdown {
+  opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0);
+}
+.nav-item.has-dropdown:hover .chevron,
+.nav-item.has-dropdown:focus-within .chevron { transform: rotate(180deg); }
+.nav-dropdown a {
+  display: block; padding: 9px 12px; font-family: var(--font-mono); font-size: 0.84rem;
+  color: var(--text-on-ink-muted); border-radius: 4px; transition: background .2s var(--ease), color .2s var(--ease);
+}
+.nav-dropdown a:hover { background: var(--ink-softer); color: var(--lake); }
+
+/* ============================================================
+   MEGA MENU — MOBILE ACCORDION
+   ============================================================ */
+.mnav-group { border-bottom: 1px solid var(--line-on-ink); }
+.mnav-group .mnav-trigger {
+  width: 100%; display: flex; justify-content: space-between; align-items: center;
+  padding-block: 10px; font-family: var(--font-display); font-size: clamp(1.5rem, 6.5vw, 2.1rem);
+  font-weight: 700; text-align: left; background: none; border: none; color: var(--text-on-ink); cursor: pointer;
+}
+.mnav-group .mnav-trigger .chevron { width: 15px; height: 15px; transition: transform .3s var(--ease); flex-shrink: 0; }
+.mnav-group.open .mnav-trigger .chevron { transform: rotate(180deg); }
+.mnav-submenu { max-height: 0; overflow: hidden; transition: max-height .4s var(--ease); }
+.mnav-group.open .mnav-submenu { max-height: 640px; }
+.mnav-submenu-inner { padding-bottom: 12px; }
+.mnav-submenu a {
+  display: block; padding: 8px 0 8px 16px; font-family: var(--font-mono); font-size: 0.95rem;
+  color: var(--text-on-ink-muted); border-left: 2px solid var(--line-on-ink);
+}
+.mnav-submenu a.mnav-hub-link { color: var(--lake); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.mobile-nav-links { overflow-y: auto; max-height: 78vh; padding-right: 4px; }
+.mobile-nav-links > a { display: block; }
+
+/* ============================================================
+   HUB PAGE GRID (Industries / Locations / Blog / Resources)
+   ============================================================ */
+.hub-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.hub-card { border: 1px solid var(--line-on-mist); border-radius: var(--radius-md); padding: 28px; transition: transform .35s var(--ease), border-color .35s var(--ease); }
+.theme-dark .hub-card { border-color: var(--line-on-ink); }
+.hub-card:hover { transform: translateY(-4px); border-color: var(--lake-dim); }
+.theme-dark .hub-card:hover { border-color: var(--lake); }
+.hub-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+.hub-card p { font-size: 0.92rem; color: var(--text-on-mist-muted); margin-bottom: 16px; }
+.theme-dark .hub-card p { color: var(--text-on-ink-muted); }
+.hub-card a.hub-card-link { font-family: var(--font-mono); font-size: 0.8rem; color: var(--lake-dim); }
+.theme-dark .hub-card a.hub-card-link { color: var(--lake); }
+.coming-soon-badge { display: inline-block; font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--apricot); border: 1px solid var(--apricot); border-radius: 999px; padding: 3px 10px; margin-bottom: 12px; }
+
+@media (max-width: 640px) {
+  .hub-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   PORTFOLIO GALLERY (Flickr-sourced, filterable by category)
+   ============================================================ */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+.filter-btn { font-family: var(--font-mono); font-size: 0.8rem; padding: 9px 18px; border: 1px solid var(--line-on-mist); border-radius: 999px; color: var(--text-on-mist-muted); transition: background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease); background: none; cursor: pointer; }
+.filter-btn:hover { border-color: var(--lake-dim); color: var(--text-on-mist); }
+.filter-btn.active { background: var(--ink); border-color: var(--ink); color: var(--mist); }
+
+.portfolio-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.portfolio-item { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius-md); border: 1px solid var(--line-on-mist); background: var(--mist-soft); }
+.portfolio-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s var(--ease); }
+.portfolio-item:hover img { transform: scale(1.06); }
+.portfolio-item figcaption { position: absolute; inset: auto 0 0 0; padding: 14px 16px 12px; background: linear-gradient(to top, rgba(13,20,18,0.88), transparent); color: #fff; font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.01em; opacity: 0; transform: translateY(8px); transition: opacity .3s var(--ease), transform .3s var(--ease); pointer-events: none; }
+.portfolio-item:hover figcaption { opacity: 1; transform: translateY(0); }
+.portfolio-item.is-hidden { display: none; }
+.portfolio-count { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-on-mist-muted); margin-bottom: 24px; }
+
+@media (max-width: 1080px) {
+  .portfolio-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 640px) {
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .filter-bar { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px; -webkit-overflow-scrolling: touch; }
+  .filter-btn { flex-shrink: 0; }
+}
+
+/* ============================================================
+   PORTFOLIO LIGHTBOX
+   ============================================================ */
+.portfolio-item { cursor: pointer; }
+.scroll-lock { overflow: hidden; }
+.lightbox {
+  position: fixed; inset: 0; z-index: 9980;
+  background: rgba(13,20,18,0.97);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .3s var(--ease), visibility .3s;
+  padding: 70px 24px;
+}
+.lightbox.open { opacity: 1; visibility: visible; pointer-events: auto; }
+.lightbox-figure { max-width: 1100px; max-height: 100%; margin: 0; display: flex; flex-direction: column; align-items: center; }
+.lightbox-img { max-width: 100%; max-height: 76vh; object-fit: contain; border-radius: var(--radius-md); box-shadow: 0 40px 100px rgba(0,0,0,0.5); background: var(--ink-soft); }
+.lightbox-caption { margin-top: 18px; font-family: var(--font-mono); font-size: 0.88rem; color: var(--mist); text-align: center; }
+.lightbox-close, .lightbox-prev, .lightbox-next {
+  position: absolute; background: rgba(233,239,234,0.08); border: 1px solid var(--line-on-ink);
+  color: var(--mist); border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background .25s var(--ease), border-color .25s var(--ease); line-height: 1;
+}
+.lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover { background: rgba(233,239,234,0.16); border-color: var(--lake); }
+.lightbox-close { top: 24px; right: 24px; width: 44px; height: 44px; font-size: 1.5rem; }
+.lightbox-prev, .lightbox-next { top: 50%; transform: translateY(-50%); width: 52px; height: 52px; font-size: 1.6rem; }
+.lightbox-prev { left: 24px; }
+.lightbox-next { right: 24px; }
+.lightbox-counter { position: absolute; top: 28px; left: 28px; font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-on-ink-muted); }
+@media (max-width: 640px) {
+  .lightbox { padding: 60px 16px; }
+  .lightbox-prev, .lightbox-next { width: 40px; height: 40px; font-size: 1.3rem; }
+  .lightbox-prev { left: 8px; } .lightbox-next { right: 8px; }
+  .lightbox-close { top: 12px; right: 12px; width: 38px; height: 38px; }
+  .lightbox-counter { top: 16px; left: 16px; }
+}
 </style>
 </head>
 <body>
@@ -570,7 +703,7 @@ html.js .ridge-hero .ridge-secondary { animation: drawRidge 2.2s var(--ease) for
 <div class="grain" aria-hidden="true"></div>
 
 <div class="preloader" id="preloader" aria-hidden="true">
-  <svg class="preloader-mark" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <svg class="preloader-mark" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
     <path class="pl-a" d="M7 6 L7 34 M7 20 L20 20 M20 6 L20 34"/>
     <path class="pl-b" d="M20 20 L33 6 M20 20 L33 34"/>
   </svg>
@@ -587,14 +720,53 @@ html.js .ridge-hero .ridge-secondary { animation: drawRidge 2.2s var(--ease) for
       Hunza Khan
     </a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#work">Work</a>
-      <a href="#process">Process</a>
-      <a href="#contact">Contact</a>
+      <div class="nav-item"><a href="about.html">About</a></div>
+      <div class="nav-item"><a href="work.html">Portfolio</a></div>
+      <div class="nav-item has-dropdown">
+        <a href="services.html">Services <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dropdown">
+          <a href="services/website-design.html">Website Design</a>
+          <a href="services/website-development.html">Website Development</a>
+          <a href="services/branding.html">Branding</a>
+          <a href="services/graphic-design.html">Graphic Design</a>
+          <a href="services/seo.html">SEO</a>
+          <a href="services/local-seo.html">Local SEO</a>
+          <a href="services/aeo.html">AEO</a>
+          <a href="services/website-maintenance.html">Website Maintenance</a>
+        </div>
+      </div>
+      <div class="nav-item has-dropdown">
+        <a href="industries.html">Industries <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dropdown">
+          <a href="industries/dentists.html">Dentists</a>
+          <a href="industries/lawyers.html">Lawyers</a>
+          <a href="industries/plastic-surgeons.html">Plastic Surgeons</a>
+          <a href="industries/med-spa.html">Med Spa</a>
+          <a href="industries/dermatologists.html">Dermatologists</a>
+          <a href="industries/roofing.html">Roofing</a>
+          <a href="industries/hvac.html">HVAC</a>
+          <a href="industries/home-builders.html">Home Builders</a>
+          <a href="industries/restaurants.html">Restaurants</a>
+          <a href="industries/fitness.html">Fitness</a>
+        </div>
+      </div>
+      <div class="nav-item has-dropdown">
+        <a href="locations.html">Locations <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dropdown">
+          <a href="locations/dallas.html">Dallas</a>
+          <a href="locations/plano.html">Plano</a>
+          <a href="locations/frisco.html">Frisco</a>
+          <a href="locations/irving.html">Irving</a>
+          <a href="locations/houston.html">Houston</a>
+          <a href="locations/austin.html">Austin</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="blog.html">Blog</a></div>
+      <div class="nav-item"><a href="resources.html">Resources</a></div>
+      <div class="nav-item"><a href="case-studies.html">Case Studies</a></div>
     </nav>
     <div class="nav-right">
-      <a href="#contact" class="btn btn-primary bracket nav-cta">Start a Project</a>
+      <a href="contact.html" class="btn btn-primary bracket nav-cta">Start a Project</a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileNav">
         <span></span><span></span><span></span>
       </button>
@@ -604,15 +776,63 @@ html.js .ridge-hero .ridge-secondary { animation: drawRidge 2.2s var(--ease) for
 
 <div class="mobile-nav" id="mobileNav" aria-hidden="true">
   <nav class="mobile-nav-links" aria-label="Mobile">
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#work">Work</a>
-    <a href="#process">Process</a>
-    <a href="#contact">Contact</a>
+        <a href="about.html">About</a>
+        <a href="work.html">Portfolio</a>
+        <div class="mnav-group">
+          <button class="mnav-trigger" aria-expanded="false">Services <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="mnav-submenu">
+            <div class="mnav-submenu-inner">
+              <a href="services.html" class="mnav-hub-link">All Services →</a>
+            <a href="services/website-design.html">Website Design</a>
+            <a href="services/website-development.html">Website Development</a>
+            <a href="services/branding.html">Branding</a>
+            <a href="services/graphic-design.html">Graphic Design</a>
+            <a href="services/seo.html">SEO</a>
+            <a href="services/local-seo.html">Local SEO</a>
+            <a href="services/aeo.html">AEO</a>
+            <a href="services/website-maintenance.html">Website Maintenance</a>
+            </div>
+          </div>
+        </div>
+        <div class="mnav-group">
+          <button class="mnav-trigger" aria-expanded="false">Industries <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="mnav-submenu">
+            <div class="mnav-submenu-inner">
+              <a href="industries.html" class="mnav-hub-link">All Industries →</a>
+            <a href="industries/dentists.html">Dentists</a>
+            <a href="industries/lawyers.html">Lawyers</a>
+            <a href="industries/plastic-surgeons.html">Plastic Surgeons</a>
+            <a href="industries/med-spa.html">Med Spa</a>
+            <a href="industries/dermatologists.html">Dermatologists</a>
+            <a href="industries/roofing.html">Roofing</a>
+            <a href="industries/hvac.html">HVAC</a>
+            <a href="industries/home-builders.html">Home Builders</a>
+            <a href="industries/restaurants.html">Restaurants</a>
+            <a href="industries/fitness.html">Fitness</a>
+            </div>
+          </div>
+        </div>
+        <div class="mnav-group">
+          <button class="mnav-trigger" aria-expanded="false">Locations <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="mnav-submenu">
+            <div class="mnav-submenu-inner">
+              <a href="locations.html" class="mnav-hub-link">All Locations →</a>
+            <a href="locations/dallas.html">Dallas</a>
+            <a href="locations/plano.html">Plano</a>
+            <a href="locations/frisco.html">Frisco</a>
+            <a href="locations/irving.html">Irving</a>
+            <a href="locations/houston.html">Houston</a>
+            <a href="locations/austin.html">Austin</a>
+            </div>
+          </div>
+        </div>
+        <a href="blog.html">Blog</a>
+        <a href="resources.html">Resources</a>
+        <a href="case-studies.html">Case Studies</a>
   </nav>
   <div class="mobile-nav-footer">
     <span class="eyebrow" style="color:var(--text-on-ink-muted)">Now booking — Q4 2026</span>
-    <a href="#contact">Start a Project →</a>
+    <a href="contact.html">Start a Project →</a>
   </div>
 </div>
 
@@ -754,28 +974,28 @@ html.js .ridge-hero .ridge-secondary { animation: drawRidge 2.2s var(--ease) for
       </div>
       <div class="work-grid">
         <article class="work-card" data-reveal>
-          <div class="work-visual wv-1"><span>View Details</span></div>
-          <div class="work-meta"><h3>Noor &amp; Co.</h3><p>Packaging &amp; Brand Identity · Food &amp; Beverage · 2026</p></div>
+          <div class="work-visual"><img src="https://live.staticflickr.com/65535/54489708305_97e0c4f556.jpg" alt="Mohebi Aviations — Website Design by Hunza Khan" loading="lazy"><span>View Details</span></div>
+          <div class="work-meta"><h3>Mohebi Aviations</h3><p>Website Design &middot; Aviation industry</p></div>
         </article>
         <article class="work-card" data-reveal>
-          <div class="work-visual wv-2"><span>View Details</span></div>
-          <div class="work-meta"><h3>Alto Studio</h3><p>Website Design &amp; Development · Architecture · 2025</p></div>
+          <div class="work-visual"><img src="https://live.staticflickr.com/65535/54487387763_6c7aa759e3_z.jpg" alt="Trios Tacos — Packaging Design by Hunza Khan" loading="lazy"><span>View Details</span></div>
+          <div class="work-meta"><h3>Trios Tacos</h3><p>Packaging Design &middot; Food & Beverage</p></div>
         </article>
         <article class="work-card" data-reveal>
-          <div class="work-visual wv-3"><span>View Details</span></div>
-          <div class="work-meta"><h3>Saffron Lane</h3><p>Full Brand Identity · Hospitality · 2025</p></div>
+          <div class="work-visual"><img src="https://live.staticflickr.com/65535/54501383268_5025721d5e_z.jpg" alt="Embody EQ — Stationery Suite by Hunza Khan" loading="lazy"><span>View Details</span></div>
+          <div class="work-meta"><h3>Embody EQ</h3><p>Stationery Suite &middot; Professional Services</p></div>
         </article>
         <article class="work-card" data-reveal>
-          <div class="work-visual wv-4"><span>View Details</span></div>
-          <div class="work-meta"><h3>Kernel Goods</h3><p>Shopify Ecommerce Build · Retail · 2026</p></div>
+          <div class="work-visual"><img src="https://live.staticflickr.com/65535/54618555035_c7cfa97c8f_h.jpg" alt="Cleartech — Mobile App UI/UX by Hunza Khan" loading="lazy"><span>View Details</span></div>
+          <div class="work-meta"><h3>Cleartech</h3><p>Mobile App UI/UX &middot; Technology</p></div>
         </article>
         <article class="work-card" data-reveal>
-          <div class="work-visual wv-5"><span>View Details</span></div>
-          <div class="work-meta"><h3>Marbleworks</h3><p>WordPress Website · Professional Services · 2025</p></div>
+          <div class="work-visual"><img src="https://live.staticflickr.com/65535/54668194077_c534ea4624_z.jpg" alt="Truckers Health — Healthcare Campaign by Hunza Khan" loading="lazy"><span>View Details</span></div>
+          <div class="work-meta"><h3>Truckers Health</h3><p>Healthcare Campaign &middot; Healthcare</p></div>
         </article>
         <article class="work-card" data-reveal>
-          <div class="work-visual wv-6"><span>View Details</span></div>
-          <div class="work-meta"><h3>Windrose Coffee</h3><p>Packaging, Logo &amp; Print · Food &amp; Beverage · 2024</p></div>
+          <div class="work-visual"><img src="https://live.staticflickr.com/65535/54485018351_14285911f9_z.jpg" alt="Investor Pitch Deck — Presentation Design by Hunza Khan" loading="lazy"><span>View Details</span></div>
+          <div class="work-meta"><h3>Investor Pitch Deck</h3><p>Presentation Design &middot; Startup / Investment</p></div>
         </article>
       </div>
       <div class="work-footer" data-reveal>
@@ -931,7 +1151,6 @@ html.js .ridge-hero .ridge-secondary { animation: drawRidge 2.2s var(--ease) for
   </section>
 
 </main>
-
 <footer class="site-footer theme-dark">
   <div class="container">
     <div class="footer-grid">
@@ -954,27 +1173,27 @@ html.js .ridge-hero .ridge-secondary { animation: drawRidge 2.2s var(--ease) for
       <div class="footer-col">
         <h3>Sitemap</h3>
         <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#work">Work</a></li>
-          <li><a href="#process">Process</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="work.html">Portfolio</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="industries.html">Industries</a></li>
+          <li><a href="locations.html">Locations</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h3>Services</h3>
+        <h3>More</h3>
         <ul>
-          <li><a href="#services">Branding &amp; Identity</a></li>
-          <li><a href="#services">Packaging Design</a></li>
-          <li><a href="#services">Web Development</a></li>
-          <li><a href="#services">Ecommerce</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="case-studies.html">Case Studies</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h3>Start a Project</h3>
         <p style="font-size:0.95rem; color:var(--text-on-ink-muted); margin-bottom:14px;">Now booking — Q4 2026.</p>
         <ul>
-          <li><a href="#contact">Send a Message →</a></li>
+          <li><a href="contact.html">Send a Message →</a></li>
         </ul>
       </div>
     </div>
@@ -987,6 +1206,7 @@ html.js .ridge-hero .ridge-secondary { animation: drawRidge 2.2s var(--ease) for
     </div>
   </div>
 </footer>
+
 
 <script>
 (function(){
@@ -1101,6 +1321,100 @@ html.js .ridge-hero .ridge-secondary { animation: drawRidge 2.2s var(--ease) for
   document.getElementById('backToTop').addEventListener('click', function(){
     window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
   });
+
+
+  /* ---------- Mobile mega-menu accordion ---------- */
+  document.querySelectorAll('.mnav-trigger').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var group = btn.closest('.mnav-group');
+      var isOpen = group.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(isOpen));
+    });
+  });
+
+
+  /* ---------- Portfolio category filter ---------- */
+  var filterBtns = document.querySelectorAll('.filter-btn');
+  if(filterBtns.length){
+    var portfolioItems = document.querySelectorAll('.portfolio-item');
+    filterBtns.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        filterBtns.forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        var filter = btn.getAttribute('data-filter');
+        portfolioItems.forEach(function(item){
+          var show = filter === 'all' || item.getAttribute('data-category') === filter;
+          item.classList.toggle('is-hidden', !show);
+        });
+      });
+    });
+  }
+
+
+  /* ---------- Portfolio lightbox ---------- */
+  var lightbox = document.getElementById('lightbox');
+  if(lightbox){
+    var lightboxImg = document.getElementById('lightboxImg');
+    var lightboxCaption = document.getElementById('lightboxCaption');
+    var lightboxCounter = document.getElementById('lightboxCounter');
+    var lightboxClose = document.getElementById('lightboxClose');
+    var lightboxPrev = document.getElementById('lightboxPrev');
+    var lightboxNext = document.getElementById('lightboxNext');
+    var lbIndex = -1;
+    var lbItems = [];
+
+    function lbRefresh(){
+      lbItems = Array.prototype.slice.call(document.querySelectorAll('.portfolio-item:not(.is-hidden)'));
+    }
+    function lbShow(){
+      if(lbIndex < 0 || lbIndex >= lbItems.length) return;
+      var item = lbItems[lbIndex];
+      var img = item.querySelector('img');
+      var caption = item.querySelector('figcaption');
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightboxCaption.textContent = caption ? caption.textContent : '';
+      lightboxCounter.textContent = (lbIndex + 1) + ' / ' + lbItems.length;
+    }
+    function lbOpen(item){
+      lbRefresh();
+      lbIndex = lbItems.indexOf(item);
+      if(lbIndex < 0) return;
+      lbShow();
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('scroll-lock');
+    }
+    function lbClose(){
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('scroll-lock');
+    }
+    function lbNext(){ if(!lbItems.length) return; lbIndex = (lbIndex + 1) % lbItems.length; lbShow(); }
+    function lbPrev(){ if(!lbItems.length) return; lbIndex = (lbIndex - 1 + lbItems.length) % lbItems.length; lbShow(); }
+
+    document.querySelectorAll('.portfolio-item').forEach(function(item){
+      item.addEventListener('click', function(){ lbOpen(item); });
+      item.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); lbOpen(item); }
+      });
+    });
+    lightboxClose.addEventListener('click', lbClose);
+    lightboxNext.addEventListener('click', lbNext);
+    lightboxPrev.addEventListener('click', lbPrev);
+    lightbox.addEventListener('click', function(e){ if(e.target === lightbox) lbClose(); });
+    document.addEventListener('keydown', function(e){
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') lbClose();
+      if(e.key === 'ArrowRight') lbNext();
+      if(e.key === 'ArrowLeft') lbPrev();
+    });
+
+    /* re-sync lightbox candidate set whenever a category filter changes */
+    document.querySelectorAll('.filter-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){ lbRefresh(); });
+    });
+  }
 
   /* ---------- Footer year ---------- */
   document.getElementById('year').textContent = new Date().getFullYear();
